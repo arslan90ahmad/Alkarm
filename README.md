@@ -2,7 +2,7 @@
 
 Marketing website for **Al Karam Real Estate** — authorized sub-dealer of Al
 Jalil Developers and the largest real-estate office in **Al Jalil Garden,
-Lahore**.
+Lahore**.   
 
 Built with **Next.js 15** (`web-next/`).
 
