@@ -27,3 +27,5 @@ web-next/out/
 
 # Local Cursor/Claude settings
 .claude/
+.deploy-payload.json
+.vercel
