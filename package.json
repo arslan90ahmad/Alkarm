@@ -1,0 +1,15 @@
+{
+  "name": "alkarm",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix web-next",
+    "build": "npm run build --prefix web-next",
+    "start": "npm run start --prefix web-next"
+  },
+  "dependencies": {
+    "next": "^15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
