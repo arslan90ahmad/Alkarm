@@ -11,18 +11,16 @@ export default function WhatsAppFloat() {
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
       data-magnet
-      className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-[0_14px_38px_rgba(16,185,129,0.42)] hover:scale-110 hover:shadow-[0_16px_46px_rgba(16,185,129,0.58)] transition-all duration-400"
+      className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full text-white transition-all duration-300 hover:scale-105"
       style={{
         background:
-          "linear-gradient(135deg, var(--color-emerald-400), var(--color-emerald-600))",
-        paddingRight: "env(safe-area-inset-right, 0px)",
+          "linear-gradient(145deg, var(--color-emerald-400), var(--color-emerald-600))",
+        boxShadow:
+          "8px 8px 18px rgba(5, 150, 105, 0.35), -4px -4px 12px rgba(255,255,255,0.7), inset 0 1px 0 rgba(255,255,255,0.25)",
+        marginBottom: "env(safe-area-inset-bottom, 0px)",
+        marginRight: "env(safe-area-inset-right, 0px)",
       }}
     >
-      <span
-        aria-hidden="true"
-        className="absolute inset-0 rounded-full animate-ping opacity-40"
-        style={{ background: "var(--color-emerald-500)" }}
-      />
       <MessageCircle size={26} strokeWidth={1.6} className="relative" />
     </a>
   );

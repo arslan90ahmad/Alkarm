@@ -2,54 +2,52 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { Menu, Phone, X } from "lucide-react";
 import { BRAND, wa } from "@/lib/brand";
+
+const NAV = [
+  { href: "#about", label: "About" },
+  { href: "#services", label: "Services" },
+  { href: "#projects", label: "Projects" },
+  { href: "#blocks", label: "Blocks" },
+  { href: "#payment", label: "Payment" },
+  { href: "#contact", label: "Contact" },
+];
 
 export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 36);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  const solid = scrolled || open;
+
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-[var(--ease-premium)] ${
-        scrolled ? "py-3" : "py-5"
-      }`}
-    >
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4 sm:pt-3.5">
       <div
-        className={`mx-auto flex items-center justify-between gap-3 sm:gap-4 overflow-hidden transition-all duration-500 ease-[var(--ease-premium)] ${
-          scrolled
-            ? "max-w-[1130px] rounded-full px-4 py-2 sm:px-7"
-            : "max-w-[1340px] rounded-full px-5 py-2.5 sm:px-10"
+        className={`mx-auto flex w-full max-w-[1320px] items-center justify-between gap-4 rounded-[18px] px-4 py-2.5 transition-all duration-300 sm:px-5 ${
+          solid
+            ? "bg-[var(--color-surface)] shadow-[6px_6px_14px_var(--color-neo-dark),-5px_-5px_12px_var(--color-neo-light)]"
+            : "bg-[rgba(10,16,28,0.55)] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/15 backdrop-blur-xl"
         }`}
-        style={{
-          backgroundColor: scrolled
-            ? "rgba(7,14,28,0.72)"
-            : "rgba(7,14,28,0)",
-          borderWidth: "1px",
-          borderStyle: "solid",
-          borderColor: scrolled ? "rgba(255,255,255,0.10)" : "rgba(255,255,255,0)",
-          backdropFilter: scrolled ? "blur(22px) saturate(140%)" : "blur(0px)",
-          WebkitBackdropFilter: scrolled
-            ? "blur(22px) saturate(140%)"
-            : "blur(0px)",
-          boxShadow: scrolled
-            ? "0 14px 44px rgba(0,0,0,0.45)"
-            : "0 14px 44px rgba(0,0,0,0)",
-          transitionProperty:
-            "background-color, border-color, backdrop-filter, -webkit-backdrop-filter, box-shadow, max-width, padding",
-          transitionDuration: "500ms",
-          transitionTimingFunction: "var(--ease-premium)",
-        }}
       >
         <a
           href="#hero"
-          className="flex items-center gap-2 shrink-0 pl-1 sm:pl-2"
+          className="flex shrink-0 items-center gap-2"
           aria-label={BRAND.name}
+          onClick={() => setOpen(false)}
         >
           <Image
             src="/images/logo.png"
@@ -57,50 +55,138 @@ export default function SiteHeader() {
             width={392}
             height={205}
             priority
-            sizes="80px"
-            className={`w-auto transition-all duration-500 ease-[var(--ease-premium)] ${
-              scrolled ? "h-8" : "h-10"
+            sizes="120px"
+            className={`w-auto transition-all duration-300 ${
+              solid ? "h-9" : "h-9 brightness-0 invert"
             }`}
           />
         </a>
 
-        <nav
-          className="flex shrink-0 items-center gap-1.5 sm:gap-2"
-          aria-label="Quick actions"
-        >
-          <div className="hidden sm:flex items-center gap-1.5 shrink-0">
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
+          {NAV.map((item) => (
             <a
-              href={BRAND.tours.alJalil}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-3 py-1.5 text-[0.78rem] font-medium tracking-[0.06em] text-[var(--color-ink-200)] rounded-full border border-[var(--color-ink-600)] hover:text-white hover:border-[var(--color-azure-500)] hover:bg-[var(--color-azure-glow)] transition-all duration-300"
+              key={item.href}
+              href={item.href}
+              className={`rounded-lg px-3 py-2 text-[0.88rem] font-semibold transition-colors duration-300 ${
+                solid
+                  ? "text-[var(--color-ink-700)] hover:text-[var(--color-accent-500)]"
+                  : "text-white/85 hover:text-white"
+              }`}
             >
-              Al-Jalil 360°
+              {item.label}
             </a>
-            <a
-              href={BRAND.tours.alNoor}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-3 py-1.5 text-[0.78rem] font-medium tracking-[0.06em] text-[var(--color-ink-200)] rounded-full border border-[var(--color-ink-600)] hover:text-white hover:border-[var(--color-azure-500)] hover:bg-[var(--color-azure-glow)] transition-all duration-300"
-            >
-              Al-Noor 360°
-            </a>
-          </div>
+          ))}
+        </nav>
+
+        <div className="hidden items-center gap-2.5 lg:flex">
+          <a
+            href={BRAND.phoneHref}
+            className={`inline-flex items-center gap-2 rounded-full px-3 py-2 text-[0.86rem] font-semibold transition-colors ${
+              solid
+                ? "text-[var(--color-ink-800)] shadow-[4px_4px_10px_var(--color-neo-dark),-4px_-4px_10px_var(--color-neo-light)] hover:text-[var(--color-accent-500)]"
+                : "bg-white/10 text-white ring-1 ring-white/20 hover:bg-white/15"
+            }`}
+          >
+            <Phone
+              size={15}
+              className={solid ? "text-[var(--color-accent-500)]" : "text-[var(--color-accent-300)]"}
+              strokeWidth={2}
+            />
+            {BRAND.phone}
+          </a>
           <a
             href={wa(
-              "Hello, I'd like to get in touch with Al Karam Real Estate."
+              "Hello, I'd like to sell my file. Here are the details:"
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 inline-flex items-center justify-center px-3.5 py-1.5 sm:px-4 text-[0.72rem] sm:text-[0.74rem] font-semibold tracking-[0.12em] uppercase rounded-full text-white border border-[var(--color-azure-600)]/40 transition-all duration-300 hover:brightness-110"
-            style={{
-              background:
-                "linear-gradient(135deg, var(--color-azure-500), var(--color-azure-700))",
-              boxShadow: "0 2px 10px rgba(79,168,255,0.22)",
-            }}
+            className={`btn !px-4 !py-2 !text-[0.8rem] ${
+              solid ? "btn-outline" : "btn-primary"
+            }`}
           >
-            Contact
+            Sell your file
           </a>
+        </div>
+
+        <button
+          type="button"
+          className={`inline-flex h-10 w-10 items-center justify-center rounded-xl lg:hidden ${
+            solid
+              ? "text-[var(--color-ink-800)] shadow-[4px_4px_10px_var(--color-neo-dark),-4px_-4px_10px_var(--color-neo-light)]"
+              : "bg-white/10 text-white ring-1 ring-white/20"
+          }`}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
+
+      <div
+        className={`mx-auto mt-2 w-full max-w-[1320px] overflow-hidden transition-[max-height,opacity] duration-300 ease-[var(--ease-premium)] lg:hidden ${
+          open ? "max-h-[100svh] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <nav
+          className="rounded-[18px] bg-[var(--color-surface)] px-4 py-5 shadow-[6px_6px_14px_var(--color-neo-dark),-5px_-5px_12px_var(--color-neo-light)]"
+          aria-label="Mobile"
+        >
+          <ul className="flex flex-col gap-0.5">
+            {NAV.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-xl px-4 py-3 text-[0.98rem] font-semibold text-[var(--color-ink-800)] hover:text-[var(--color-accent-500)]"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-5 flex flex-col gap-2.5 pt-1">
+            <a
+              href={BRAND.phoneHref}
+              className="inline-flex items-center justify-center gap-2 text-[0.92rem] font-semibold text-[var(--color-ink-800)]"
+            >
+              <Phone
+                size={16}
+                className="text-[var(--color-accent-500)]"
+                strokeWidth={2}
+              />
+              {BRAND.phone}
+            </a>
+            <a
+              href={wa(
+                "Hello, I'd like to sell my file. Here are the details:"
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary w-full"
+              onClick={() => setOpen(false)}
+            >
+              Sell your file
+            </a>
+            <div className="grid grid-cols-2 gap-2">
+              <a
+                href={BRAND.tours.alJalil}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline !py-2.5 text-center"
+              >
+                Al-Jalil 360°
+              </a>
+              <a
+                href={BRAND.tours.alNoor}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline !py-2.5 text-center"
+              >
+                Al-Noor 360°
+              </a>
+            </div>
+          </div>
         </nav>
       </div>
     </header>

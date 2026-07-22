@@ -13,18 +13,19 @@ type Service = {
   num: string;
   title: string;
   desc: string;
-  icon: React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }>;
+  icon: React.ComponentType<{
+    size?: number;
+    strokeWidth?: number;
+    className?: string;
+  }>;
   cta: { label: string; href: string; external?: boolean };
-  /** Bento positioning */
-  span: string;
-  featured?: boolean;
 };
 
 const SERVICES: Service[] = [
   {
     num: "01",
     title: "Sale & Purchase",
-    desc: "Buying and selling plots, commercial units, and homes across Al Jalil Garden and Al Noor Orchard — every cutting from 3, 5, 8, 10 Marla to 1 & 2 Kanal. Selling a file? Share the details and we'll buy it from you directly.",
+    desc: "Buy and sell plots and homes across Al Jalil Garden and Al Noor Orchard. Selling a file? We buy directly.",
     icon: Building2,
     cta: {
       label: "Get in touch",
@@ -33,13 +34,11 @@ const SERVICES: Service[] = [
       ),
       external: true,
     },
-    span: "md:col-span-2 md:row-span-2",
-    featured: true,
   },
   {
     num: "02",
     title: "Property Marketing",
-    desc: "Strategic campaigns that put your property in front of our 1,800+ buyer network — for the fastest sale and best return.",
+    desc: "Strategic campaigns that put your listing in front of our 1,800+ buyer network for a faster sale.",
     icon: Megaphone,
     cta: {
       label: "Get in touch",
@@ -48,12 +47,11 @@ const SERVICES: Service[] = [
       ),
       external: true,
     },
-    span: "md:col-span-2",
   },
   {
     num: "03",
     title: "File Verification",
-    desc: "Thorough verification of property documentation and ownership history. Every transaction legally sound, fully transparent.",
+    desc: "Full document and ownership checks so every transaction stays legal, clear, and transparent.",
     icon: FileCheck2,
     cta: {
       label: "Get in touch",
@@ -62,30 +60,27 @@ const SERVICES: Service[] = [
       ),
       external: true,
     },
-    span: "",
   },
   {
     num: "04",
     title: "Virtual Site Tours",
-    desc: "Can't visit in person? Walk the entire development through our immersive 360° tour from anywhere in the world.",
+    desc: "Can't visit in person? Walk the development through our immersive 360° tour from anywhere.",
     icon: Compass,
     cta: { label: "Take the tour", href: BRAND.tours.alJalil, external: true },
-    span: "",
   },
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="relative">
+    <section id="services" className="relative section-muted">
       <div className="section-shell">
-        <div className="reveal max-w-3xl">
+        <div className="reveal section-center mx-auto max-w-2xl">
           <span className="eyebrow">What We Do</span>
           <h2 className="display-title mt-3">Services that move you in.</h2>
           <div className="accent-rule mt-5" />
         </div>
 
-        {/* Bento grid (innovation) */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-4 md:auto-rows-[minmax(220px,auto)] gap-4 sm:gap-5">
+        <div className="mt-8 reveal stagger grid grid-cols-1 gap-5 md:grid-cols-2">
           {SERVICES.map((s) => (
             <a
               key={s.num}
@@ -93,69 +88,35 @@ export default function Services() {
               target={s.cta.external ? "_blank" : undefined}
               rel={s.cta.external ? "noopener noreferrer" : undefined}
               data-magnet
-              className={`group reveal relative overflow-hidden rounded-2xl p-7 sm:p-8 glass hover:border-[var(--color-azure-500)] transition-all duration-500 ${s.span}`}
+              className="card group grid grid-cols-[auto_1fr] gap-x-5 gap-y-4 p-6 sm:p-7"
             >
-              {/* Hover gradient border via pseudo-element */}
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{
-                  background:
-                    "radial-gradient(360px 220px at var(--mx,30%) var(--my,30%), rgba(79,168,255,0.20), transparent 60%)",
-                }}
-              />
-              <div className="relative flex flex-col h-full">
-                <div className="flex items-start justify-between">
-                  <div className="num text-[0.78rem] tracking-[0.32em] text-[var(--color-ink-400)]">
-                    {s.num}
+              <div className="neo-chip flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-[var(--color-accent-500)]">
+                <s.icon size={26} strokeWidth={1.6} />
+              </div>
+
+              <div className="min-w-0 flex flex-col">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <span className="num text-[0.72rem] font-bold tracking-[0.18em] text-[var(--color-accent-500)]">
+                      {s.num}
+                    </span>
+                    <h3 className="mt-1 font-[family-name:var(--font-heading)] text-[1.2rem] font-bold leading-tight text-[var(--color-ink-800)]">
+                      {s.title}
+                    </h3>
                   </div>
                   <ArrowUpRight
-                    size={20}
-                    className="text-[var(--color-ink-300)] group-hover:text-[var(--color-azure-400)] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-500"
-                    strokeWidth={1.5}
+                    size={18}
+                    className="mt-1 shrink-0 text-[var(--color-ink-400)] transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[var(--color-accent-500)]"
+                    strokeWidth={1.8}
                   />
                 </div>
 
-                <div
-                  className={`mt-${s.featured ? "8" : "5"} w-14 h-14 rounded-2xl flex items-center justify-center border ${
-                    s.featured
-                      ? "border-[var(--color-azure-600)]/40 bg-[var(--color-azure-glow)]"
-                      : "border-[var(--color-ink-600)] bg-[var(--color-ink-700)]"
-                  }`}
-                >
-                  <s.icon
-                    size={s.featured ? 30 : 24}
-                    strokeWidth={1.4}
-                    className={
-                      s.featured
-                        ? "text-[var(--color-azure-400)]"
-                        : "text-[var(--color-azure-400)]"
-                    }
-                  />
-                </div>
+                <p className="card-desc mt-2.5 line-clamp-3">{s.desc}</p>
 
-                <h3
-                  className={`font-[family-name:var(--font-heading)] text-white mt-5 ${
-                    s.featured ? "text-[2.2rem] leading-[1.05]" : "text-2xl"
-                  }`}
-                >
-                  {s.title}
-                </h3>
-
-                <p
-                  className={`mt-3 text-[var(--color-ink-200)] leading-[1.75] ${
-                    s.featured ? "text-[1.02rem] max-w-[42ch]" : "text-[0.94rem]"
-                  }`}
-                >
-                  {s.desc}
-                </p>
-
-                <div className="mt-auto pt-6">
-                  <span className="inline-flex items-center gap-2 text-[0.78rem] tracking-[0.16em] uppercase font-semibold text-[var(--color-azure-400)]">
-                    {s.cta.label}
-                    <ArrowUpRight size={14} strokeWidth={2} />
-                  </span>
-                </div>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-[0.84rem] font-semibold text-[var(--color-accent-600)]">
+                  {s.cta.label}
+                  <ArrowUpRight size={14} strokeWidth={2.2} />
+                </span>
               </div>
             </a>
           ))}

@@ -7,6 +7,12 @@ export default function ClientShell({
 }: {
   children: React.ReactNode;
 }) {
+  // Enable reveal animations only after JS is ready (content stays visible if JS fails)
+  useEffect(() => {
+    document.documentElement.classList.add("js-ready");
+    return () => document.documentElement.classList.remove("js-ready");
+  }, []);
+
   // Scroll progress
   useEffect(() => {
     const bar = document.getElementById("scroll-progress");
@@ -107,10 +113,15 @@ export default function ClientShell({
     };
   }, []);
 
-  // Reveal-on-scroll
+  // Reveal-on-scroll with safer thresholds + fallback
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const els = document.querySelectorAll<HTMLElement>(".reveal");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document
+        .querySelectorAll<HTMLElement>(".reveal, .stagger")
+        .forEach((el) => el.classList.add("in"));
+      return;
+    }
+
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -120,10 +131,34 @@ export default function ClientShell({
           }
         });
       },
-      { threshold: 0.14, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
     );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+
+    const observeAll = () => {
+      document
+        .querySelectorAll<HTMLElement>(".reveal:not(.in), .stagger:not(.in)")
+        .forEach((el) => io.observe(el));
+    };
+
+    observeAll();
+
+    const mo = new MutationObserver(() => observeAll());
+    mo.observe(document.getElementById("main") ?? document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    const fallback = window.setTimeout(() => {
+      document
+        .querySelectorAll<HTMLElement>(".reveal:not(.in), .stagger:not(.in)")
+        .forEach((el) => el.classList.add("in"));
+    }, 2500);
+
+    return () => {
+      io.disconnect();
+      mo.disconnect();
+      window.clearTimeout(fallback);
+    };
   }, []);
 
   return (

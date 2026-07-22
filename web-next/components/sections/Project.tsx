@@ -12,18 +12,38 @@ import {
   Lock,
   Construction,
   Cable,
-  ArrowUpRight,
   Compass,
   BookOpen,
+  ArrowUpRight,
 } from "lucide-react";
 import { wa, BRAND } from "@/lib/brand";
 
 const PLOTS = [
-  { num: 3, unit: "Marla", img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" },
-  { num: 5, unit: "Marla", img: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&q=80" },
-  { num: 10, unit: "Marla", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80" },
-  { num: 15, unit: "Marla", img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" },
-  { num: 1, unit: "Kanal", img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80" },
+  {
+    num: 3,
+    unit: "Marla",
+    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
+  },
+  {
+    num: 5,
+    unit: "Marla",
+    img: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&q=80",
+  },
+  {
+    num: 10,
+    unit: "Marla",
+    img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80",
+  },
+  {
+    num: 15,
+    unit: "Marla",
+    img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
+  },
+  {
+    num: 1,
+    unit: "Kanal",
+    img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80",
+  },
 ];
 
 const AMENITIES = [
@@ -54,40 +74,43 @@ export default function Project() {
           <div className="accent-rule mt-5" />
         </div>
 
-        <div className="mt-12 grid lg:grid-cols-[1.4fr_1fr] gap-8">
-          {/* Main project info + plots */}
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
           <div className="reveal">
-            <div className="glass p-7 sm:p-9 rounded-2xl">
-              <div className="flex flex-wrap items-center gap-3 mb-5">
+            <div className="card p-7 sm:p-9">
+              <div className="mb-5 flex flex-wrap items-center gap-3">
                 <span className="pill-verified">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-emerald-500)]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-emerald-500)]" />
                   LDA Approved
                 </span>
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[0.7rem] tracking-[0.18em] uppercase text-[var(--color-champagne-400)] border border-[var(--color-champagne-400)]/30 bg-[var(--color-champagne-400)]/[0.06]">
+                <span className="neo-chip inline-flex items-center gap-2 rounded-full px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[var(--color-accent-700)]">
                   Flagship Development
                 </span>
               </div>
-              <p className="flex items-center gap-2 text-[var(--color-azure-300)] text-[0.94rem]">
+              <p className="flex items-center gap-2 text-[0.94rem] text-[var(--color-accent-600)]">
                 <MapPin size={16} strokeWidth={1.8} />
-                Suburbs of Lahore — Lahore&apos;s largest housing project in
+                Suburbs of Lahore, Lahore&apos;s largest housing project in
                 Lahore West
               </p>
-              <p className="mt-5 lede max-w-none">
+              <p className="lede mt-5 max-w-none">
                 A gated community featuring{" "}
-                <strong className="text-white">Lahore Grammar School</strong>,{" "}
-                <strong className="text-white">Abadat University</strong>,
-                Cinema, Pizza Hut, Gloria Jeans, Jade Cafe, Water Filtration
-                Plant, 24/7 Power Backup, Underground Electricity, Jamia
-                Masjid, Sports Complex, and Al-Jalil Healthcare. A complete
-                ecosystem for modern, secure, and luxurious living.
+                <strong className="font-semibold text-[var(--color-ink-800)]">
+                  Lahore Grammar School
+                </strong>
+                ,{" "}
+                <strong className="font-semibold text-[var(--color-ink-800)]">
+                  Abadat University
+                </strong>
+                , Cinema, Pizza Hut, Gloria Jeans, Jade Cafe, Water Filtration
+                Plant, 24/7 Power Backup, Underground Electricity, Jamia Masjid,
+                Sports Complex, and Al-Jalil Healthcare. A complete ecosystem for
+                modern, secure, and luxurious living.
               </p>
 
-              {/* Plot matrix — innovation */}
               <div className="mt-8">
-                <p className="text-[0.74rem] tracking-[0.22em] uppercase text-[var(--color-ink-300)] mb-4">
+                <p className="mb-4 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-ink-500)]">
                   Available cuttings
                 </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                <div className="reveal stagger mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
                   {PLOTS.map((p) => (
                     <a
                       key={`${p.num}-${p.unit}`}
@@ -97,28 +120,28 @@ export default function Project() {
                       target="_blank"
                       rel="noopener noreferrer"
                       data-magnet
-                      className="group relative aspect-[3/4] rounded-2xl overflow-hidden border border-[var(--color-ink-600)] hover:border-[var(--color-azure-500)] transition-all duration-500"
+                      className="group relative aspect-[3/4] overflow-hidden rounded-[20px] shadow-[8px_8px_18px_var(--color-neo-dark),-8px_-8px_18px_var(--color-neo-light)] transition-all duration-500 hover:-translate-y-1"
                     >
                       <div
-                        className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-[1.2s] ease-[var(--ease-premium)]"
+                        className="img-zoom absolute inset-0 bg-cover bg-center"
                         style={{ backgroundImage: `url(${p.img})` }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[rgba(5,11,24,0.96)] via-[rgba(5,11,24,0.55)] to-transparent" />
-                      <div className="absolute top-3 left-3">
+                      <div className="absolute inset-0 bg-gradient-to-t from-[rgba(11,18,32,0.95)] via-[rgba(11,18,32,0.45)] to-transparent" />
+                      <div className="absolute left-3 top-3">
                         <span className="pill-verified !text-[0.62rem]">
                           Available
                         </span>
                       </div>
-                      <div className="absolute bottom-0 inset-x-0 p-3">
+                      <div className="absolute inset-x-0 bottom-0 p-3">
                         <div className="flex items-baseline gap-1">
-                          <span className="num text-3xl font-semibold text-white leading-none">
+                          <span className="num text-3xl font-bold leading-none text-white">
                             {p.num}
                           </span>
-                          <span className="text-[0.78rem] tracking-[0.18em] uppercase text-[var(--color-ink-200)]">
+                          <span className="text-[0.78rem] uppercase tracking-[0.14em] text-white/75">
                             {p.unit}
                           </span>
                         </div>
-                        <span className="mt-2 inline-flex items-center gap-1 text-[0.7rem] tracking-[0.16em] uppercase text-[var(--color-azure-400)]">
+                        <span className="mt-2 inline-flex items-center gap-1 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[var(--color-accent-300)]">
                           Inquire <ArrowUpRight size={12} strokeWidth={2.2} />
                         </span>
                       </div>
@@ -142,35 +165,34 @@ export default function Project() {
                   href={BRAND.developer.alJalilPage}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-outline"
+                  className="btn btn-outline-dark"
                 >
                   Official Site
                 </a>
               </div>
 
-              <div className="mt-7 pt-6 border-t border-[var(--color-ink-700)]">
-                <p className="text-[0.7rem] tracking-[0.22em] uppercase text-[var(--color-ink-400)] mb-2">
+              <div className="mt-7 border-t border-[var(--color-neo-dark)]/40 pt-6">
+                <p className="mb-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-ink-500)]">
                   Map resources
                 </p>
                 <a
                   href={BRAND.mapResource}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[var(--color-azure-400)] hover:text-[var(--color-azure-300)] text-[0.94rem]"
+                  className="text-[0.94rem] font-medium text-[var(--color-accent-500)] hover:underline"
                 >
-                  Al Jalil Garden Map Lahore — Satellite View →
+                  Al Jalil Garden Map Lahore, Satellite View →
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Amenities sidebar */}
           <div className="reveal">
-            <div className="glass p-7 sm:p-9 rounded-2xl h-full">
-              <p className="text-[0.74rem] tracking-[0.22em] uppercase text-[var(--color-champagne-400)] mb-2">
+            <div className="card h-full p-7 sm:p-9">
+              <p className="mb-2 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-accent-500)]">
                 Lifestyle
               </p>
-              <h3 className="font-[family-name:var(--font-heading)] text-3xl text-white">
+              <h3 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-[var(--color-ink-800)]">
                 World-Class Amenities
               </h3>
               <div className="accent-rule mt-4" />
@@ -179,14 +201,14 @@ export default function Project() {
                 {AMENITIES.map((a) => (
                   <div
                     key={a.label}
-                    className="flex items-center gap-3 px-3 py-3 rounded-xl border border-[var(--color-ink-700)] bg-[rgba(255,255,255,0.02)] hover:border-[var(--color-azure-600)]/40 hover:bg-[var(--color-azure-glow)] transition-all duration-300"
+                    className="neo-chip flex items-center gap-3 rounded-xl px-3 py-3 transition-all duration-300 hover:-translate-y-0.5"
                   >
                     <a.icon
                       size={20}
                       strokeWidth={1.5}
-                      className="text-[var(--color-azure-400)] shrink-0"
+                      className="shrink-0 text-[var(--color-accent-500)]"
                     />
-                    <span className="text-[0.86rem] text-[var(--color-ink-100)]">
+                    <span className="text-[0.86rem] font-medium text-[var(--color-ink-800)]">
                       {a.label}
                     </span>
                   </div>

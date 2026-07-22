@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { wa, BRAND } from "@/lib/brand";
 
-/** Live availability — West Marina is the main attraction at Al Noor Orchard.
+/** Live availability: West Marina is the main attraction at Al Noor Orchard.
     Marina Canal Front Sector-A plots are open for sale. */
 const LISTINGS = [
   {
@@ -36,7 +36,7 @@ const LISTINGS = [
     plot: "MSC",
     size: "05 Marla",
     block: "Marina Sports City",
-    sector: "—",
+    sector: "",
   },
 ];
 
@@ -49,106 +49,100 @@ const SECTORS = [
 
 export default function AlNoorOrchard() {
   return (
-    <section id="al-noor-orchard" className="relative">
+    <section id="al-noor-orchard" className="relative section-muted">
       <div className="section-shell">
-        <div className="reveal max-w-3xl">
+        <div className="reveal section-center mx-auto max-w-2xl">
           <span className="eyebrow">Our Project</span>
           <h2 className="display-title mt-3">Al Noor Orchard</h2>
           <div className="accent-rule mt-5" />
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+            <span className="pill-verified">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-emerald-500)]" />
+              LDA Approved
+            </span>
+            <span className="badge-featured">Waterfront Living</span>
+          </div>
+          <p className="mt-4 flex items-center justify-center gap-2 text-[0.92rem] text-[var(--color-ink-600)]">
+            <MapPin
+              size={16}
+              strokeWidth={1.8}
+              className="text-[var(--color-accent-500)]"
+            />
+            Jaranwala Road, west of Lahore, featuring the signature{" "}
+            <strong className="text-[var(--color-ink-800)]">West Marina</strong>{" "}
+            waterfront
+          </p>
+          <p className="lede mt-5">
+            Al Noor Orchard&apos;s crown jewel is{" "}
+            <strong className="font-semibold text-[var(--color-ink-800)]">
+              West Marina
+            </strong>
+            , with Marina Canal Front, Marina Sports City, Marina Sports City
+            Residencia, and Executive Cottages &amp; blocks. Right now,{" "}
+            <strong className="font-semibold text-[var(--color-ink-800)]">
+              Marina Canal Front Sector-A
+            </strong>{" "}
+            plots are available for sale.
+          </p>
         </div>
 
-        <div className="mt-12 grid lg:grid-cols-[1.4fr_1fr] gap-8">
-          {/* Live listings + overview */}
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
           <div className="reveal">
-            <div className="glass p-7 sm:p-9 rounded-2xl">
-              <div className="flex flex-wrap items-center gap-3 mb-5">
-                <span className="pill-verified">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-emerald-500)]" />
-                  LDA Approved
-                </span>
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[0.7rem] tracking-[0.18em] uppercase text-[var(--color-champagne-400)] border border-[var(--color-champagne-400)]/30 bg-[var(--color-champagne-400)]/[0.06]">
-                  Waterfront Living
-                </span>
-              </div>
-              <p className="flex items-center gap-2 text-[var(--color-azure-300)] text-[0.94rem]">
-                <MapPin size={16} strokeWidth={1.8} />
-                Jaranwala Road, west of Lahore — featuring the signature{" "}
-                <strong className="text-white">West Marina</strong> waterfront
+            <div className="card p-6 sm:p-8">
+              <p className="mb-4 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-ink-600)]">
+                Available now: West Marina
               </p>
-              <p className="mt-5 lede max-w-none">
-                Al Noor Orchard&apos;s crown jewel is{" "}
-                <strong className="text-white">West Marina</strong> — with
-                Marina Canal Front, Marina Sports City, Marina Sports City
-                Residencia, and Executive Cottages &amp; blocks. Right now,{" "}
-                <strong className="text-white">
-                  Marina Canal Front Sector-A
-                </strong>{" "}
-                plots are available for sale.
-              </p>
-
-              {/* Live availability table */}
-              <div className="mt-8">
-                <p className="text-[0.74rem] tracking-[0.22em] uppercase text-[var(--color-ink-300)] mb-4">
-                  Available now — West Marina
-                </p>
-                <div className="overflow-hidden rounded-2xl border border-[var(--color-ink-600)]">
-                  {/* header */}
-                  <div className="grid grid-cols-[auto_1fr_auto] sm:grid-cols-[auto_1fr_auto_auto] gap-3 px-4 py-3 bg-[rgba(255,255,255,0.03)] text-[0.66rem] tracking-[0.18em] uppercase text-[var(--color-ink-400)]">
-                    <span>Plot</span>
-                    <span>Block / Sector</span>
-                    <span className="text-right">Size</span>
-                    <span className="hidden sm:block text-right">Inquire</span>
-                  </div>
-                  {LISTINGS.map((l) => (
-                    <a
-                      key={l.plot}
-                      href={wa(
-                        `Hello, I'm interested in Plot ${l.plot} (${l.size}) — ${l.block}${
-                          l.sector !== "—" ? ` ${l.sector}` : ""
-                        }, West Marina, Al Noor Orchard.`
-                      )}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      data-magnet
-                      className="grid grid-cols-[auto_1fr_auto] sm:grid-cols-[auto_1fr_auto_auto] gap-3 items-center px-4 py-4 border-t border-[var(--color-ink-700)] hover:bg-[var(--color-azure-glow)] transition-colors duration-300 group"
-                    >
-                      <span className="num text-lg font-semibold text-white leading-none min-w-[2.5rem]">
-                        {l.plot}
-                      </span>
-                      <span className="min-w-0">
-                        <span className="block text-[0.92rem] text-white truncate">
-                          {l.block}
-                        </span>
-                        <span className="block text-[0.74rem] text-[var(--color-ink-300)]">
-                          {l.sector !== "—" ? l.sector : "West Marina"}
-                          {l.highlight && (
-                            <span className="ml-2 text-[var(--color-emerald-500)]">
-                              ● Canal front
-                            </span>
-                          )}
-                        </span>
-                      </span>
-                      <span className="inline-flex items-baseline gap-1 justify-self-end">
-                        <span className="num text-base font-semibold text-[var(--color-azure-300)] leading-none">
-                          {l.size.split(" ")[0]}
-                        </span>
-                        <span className="text-[0.7rem] tracking-[0.1em] uppercase text-[var(--color-ink-300)]">
-                          {l.size.split(" ")[1]}
-                        </span>
-                      </span>
-                      <span className="hidden sm:inline-flex items-center justify-end text-[var(--color-azure-400)] group-hover:translate-x-0.5 transition-transform">
-                        <ArrowUpRight size={16} strokeWidth={2} />
-                      </span>
-                    </a>
-                  ))}
+              <div className="overflow-hidden rounded-[20px] shadow-[inset_5px_5px_12px_var(--color-neo-dark),inset_-5px_-5px_12px_var(--color-neo-light)]">
+                <div className="grid grid-cols-[auto_1fr_auto] gap-3 px-4 py-3 text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-[var(--color-ink-600)] sm:grid-cols-[auto_1fr_auto_auto]">
+                  <span>Plot</span>
+                  <span>Block / Sector</span>
+                  <span className="text-right">Size</span>
+                  <span className="hidden text-right sm:block">Inquire</span>
                 </div>
-                <p className="mt-3 text-[0.82rem] text-[var(--color-ink-300)]">
-                  Availability and pricing change often — tap any plot to
-                  confirm on WhatsApp, or visit our office for a physical tour.
-                </p>
+                {LISTINGS.map((l) => (
+                  <a
+                    key={l.plot}
+                    href={wa(
+                      `Hello, I'm interested in Plot ${l.plot} (${l.size}), ${l.block}${
+                        l.sector ? ` ${l.sector}` : ""
+                      }, West Marina, Al Noor Orchard.`
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-magnet
+                    className="group grid grid-cols-[auto_1fr_auto] items-center gap-3 border-t border-[var(--color-neo-dark)]/30 px-4 py-4 transition-colors hover:bg-[var(--color-accent-50)]/50 sm:grid-cols-[auto_1fr_auto_auto]"
+                  >
+                    <span className="num min-w-[2.5rem] text-lg font-bold leading-none text-[var(--color-ink-800)]">
+                      {l.plot}
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block truncate text-[0.92rem] font-medium text-[var(--color-ink-800)]">
+                        {l.block}
+                      </span>
+                      <span className="block text-[0.74rem] text-[var(--color-ink-600)]">
+                        {l.sector || "West Marina"}
+                        {l.highlight && (
+                          <span className="ml-2 text-[var(--color-emerald-600)]">
+                            ● Canal front
+                          </span>
+                        )}
+                      </span>
+                    </span>
+                    <span className="justify-self-end text-[0.9rem] font-semibold text-[var(--color-accent-500)]">
+                      {l.size}
+                    </span>
+                    <span className="hidden justify-end text-[var(--color-accent-500)] transition-transform group-hover:translate-x-0.5 sm:inline-flex">
+                      <ArrowUpRight size={16} strokeWidth={2} />
+                    </span>
+                  </a>
+                ))}
               </div>
+              <p className="mt-3 text-[0.84rem] text-[var(--color-ink-600)]">
+                Availability and pricing change often, so tap any plot to confirm
+                on WhatsApp, or visit our office for a physical tour.
+              </p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-7 flex flex-wrap gap-3">
                 <a
                   href={BRAND.tours.alNoor}
                   target="_blank"
@@ -163,27 +157,22 @@ export default function AlNoorOrchard() {
                   href={BRAND.developer.alNoorPage}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-outline"
+                  className="btn btn-outline-dark"
                 >
                   Official Site
                 </a>
               </div>
 
-              {/* Sell-your-file callout */}
-              <div className="mt-7 pt-6 border-t border-[var(--color-ink-700)] flex flex-col sm:flex-row sm:items-center gap-4">
-                <div className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center bg-[var(--color-champagne-400)]/[0.08] border border-[var(--color-champagne-400)]/30">
-                  <Repeat2
-                    size={20}
-                    strokeWidth={1.6}
-                    className="text-[var(--color-champagne-400)]"
-                  />
+              <div className="mt-7 flex flex-col gap-4 border-t border-[var(--color-neo-dark)]/40 pt-6 sm:flex-row sm:items-center">
+                <div className="neo-chip flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-[var(--color-accent-500)]">
+                  <Repeat2 size={20} strokeWidth={1.6} />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-[family-name:var(--font-heading)] text-xl text-white">
+                  <h4 className="font-[family-name:var(--font-heading)] text-lg font-bold text-[var(--color-ink-800)]">
                     Want to sell your file?
                   </h4>
-                  <p className="mt-1 text-[0.9rem] text-[var(--color-ink-200)]">
-                    Share the details and we&apos;ll buy it from you directly —
+                  <p className="mt-1 text-[0.9rem] text-[var(--color-ink-600)]">
+                    Share the details and we&apos;ll buy it from you directly:
                     fast, transparent, and hassle-free.
                   </p>
                 </div>
@@ -194,7 +183,7 @@ export default function AlNoorOrchard() {
                   target="_blank"
                   rel="noopener noreferrer"
                   data-magnet
-                  className="btn btn-gold shrink-0"
+                  className="btn btn-primary shrink-0"
                 >
                   Sell to us
                 </a>
@@ -202,61 +191,60 @@ export default function AlNoorOrchard() {
             </div>
           </div>
 
-          {/* Sectors + cuttings sidebar */}
           <div className="reveal">
-            <div className="glass p-7 sm:p-9 rounded-2xl h-full">
-              <p className="text-[0.74rem] tracking-[0.22em] uppercase text-[var(--color-champagne-400)] mb-2">
+            <div className="card h-full p-6 sm:p-8">
+              <p className="mb-2 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-accent-500)]">
                 The Marina
               </p>
-              <h3 className="font-[family-name:var(--font-heading)] text-3xl text-white">
+              <h3 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-[var(--color-ink-800)]">
                 Sectors &amp; Blocks
               </h3>
               <div className="accent-rule mt-4" />
 
-              <div className="mt-8 grid gap-3">
+              <div className="mt-7 grid gap-3">
                 {SECTORS.map((s) => (
                   <div
                     key={s}
-                    className="flex items-center gap-3 px-3 py-3 rounded-xl border border-[var(--color-ink-700)] bg-[rgba(255,255,255,0.02)] hover:border-[var(--color-azure-600)]/40 hover:bg-[var(--color-azure-glow)] transition-all duration-300"
+                    className="neo-chip flex items-center gap-3 rounded-xl px-3 py-3 transition-all hover:-translate-y-0.5"
                   >
                     <Waves
-                      size={20}
+                      size={18}
                       strokeWidth={1.5}
-                      className="text-[var(--color-azure-400)] shrink-0"
+                      className="shrink-0 text-[var(--color-accent-500)]"
                     />
-                    <span className="text-[0.9rem] text-[var(--color-ink-100)]">
+                    <span className="text-[0.9rem] font-medium text-[var(--color-ink-800)]">
                       {s}
                     </span>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-7 pt-6 border-t border-[var(--color-ink-700)]">
-                <p className="text-[0.74rem] tracking-[0.22em] uppercase text-[var(--color-ink-300)] mb-4">
+              <div className="mt-7 border-t border-[var(--color-neo-dark)]/40 pt-6">
+                <p className="mb-4 text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-ink-600)]">
                   We deal in
                 </p>
                 <div className="grid gap-2.5">
-                  <span className="flex items-center gap-2.5 text-[0.88rem] text-[var(--color-ink-100)]">
+                  <span className="flex items-center gap-2.5 text-[0.88rem] text-[var(--color-ink-600)]">
                     <Anchor
                       size={16}
                       strokeWidth={1.6}
-                      className="text-[var(--color-azure-400)]"
+                      className="text-[var(--color-accent-500)]"
                     />
-                    Residential plots — 3, 5, 8, 10 Marla &amp; 1, 2 Kanal
+                    Residential plots: 3, 5, 8, 10 Marla &amp; 1, 2 Kanal
                   </span>
-                  <span className="flex items-center gap-2.5 text-[0.88rem] text-[var(--color-ink-100)]">
+                  <span className="flex items-center gap-2.5 text-[0.88rem] text-[var(--color-ink-600)]">
                     <Building2
                       size={16}
                       strokeWidth={1.6}
-                      className="text-[var(--color-azure-400)]"
+                      className="text-[var(--color-accent-500)]"
                     />
-                    Commercial plots — every major cutting
+                    Commercial plots of every major cutting
                   </span>
-                  <span className="flex items-center gap-2.5 text-[0.88rem] text-[var(--color-ink-100)]">
+                  <span className="flex items-center gap-2.5 text-[0.88rem] text-[var(--color-ink-600)]">
                     <Home
                       size={16}
                       strokeWidth={1.6}
-                      className="text-[var(--color-azure-400)]"
+                      className="text-[var(--color-accent-500)]"
                     />
                     Ready-built homes &amp; cottages
                   </span>
